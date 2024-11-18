@@ -1,25 +1,9 @@
 services:
-  fcgi:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    expose:
-      - "1337"
-    restart: always
-    networks:
-      - backend
-
-
-  nginx:
-    build:
-      context: ./static
-      dockerfile: Dockerfile
+  webapp:
+    build: .
     ports:
-      - "24598:24598"
-    depends_on:
-      - fcgi
-    networks:
-      - backend
-
-networks:
-  backend:
+      - "8080:8080"
+    volumes:
+      - ./target:/opt/jboss/wildfly/standalone/deployments/
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m

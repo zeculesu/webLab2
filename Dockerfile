@@ -1,7 +1,9 @@
-FROM openjdk:17-jdk
+FROM jboss/wildfly:latest
 
-EXPOSE 1337
+WORKDIR /opt/jboss/wildfly/standalone/deployments/
 
-COPY target/fastCGI-1.0-SNAPSHOT-jar-with-dependencies.jar /app.jar
+COPY target/webLab2.war /opt/jboss/wildfly/standalone/deployments/
 
-ENTRYPOINT ["java", "-DFCGI_PORT=1337", "-jar", "app.jar"]
+EXPOSE 8080
+
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]

@@ -23,7 +23,7 @@ async function handleSubmit(xInput = getInputX(), yInput = getInputY()) {
         };
 
         const startTime = Date.now();
-        const url = "/fastcgi/";
+        const url = "/";
 
         try {
             const response = await fetch(url, requestContent);
